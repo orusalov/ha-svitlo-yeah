@@ -28,14 +28,26 @@ _BROWSER_HEADERS = {
 }
 
 
+_COOKIE_ATTR_NAMES = frozenset(
+    {"domain", "path", "expires", "max-age", "samesite", "httponly", "secure"}
+)
+
+
 def parse_cookie_string(cookie_str: str) -> dict[str, str]:
-    """Parse a Cookie header string into a dict."""
+    """Parse a Cookie header string into a dict, filtering Set-Cookie attributes."""
     cookies = {}
     for part in cookie_str.split(";"):
         part = part.strip()
+        if not part:
+            continue
         if "=" in part:
             key, _, value = part.partition("=")
-            cookies[key.strip()] = value.strip()
+            key = key.strip()
+            if key.lower() not in _COOKIE_ATTR_NAMES:
+                cookies[key] = value.strip()
+        elif part.lower() not in _COOKIE_ATTR_NAMES:
+            # flags like HttpOnly, Secure — skip silently
+            pass
     return cookies
 
 
