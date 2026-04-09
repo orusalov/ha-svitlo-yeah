@@ -4,7 +4,8 @@
     "abort": {
       "no_accounts_found": "No accounts found",
       "yasno_connection_error": "Failed to fetch Yasno groups.\nPlease check your connection to Yasno API.\n{url}",
-      "dtek_json_empty_data": "Failed to fetch groups.\nPlease check your connection to the data source.\n`fact.data` field should exist and not be empty.\nThis can happen if there are no scheduled outages for today.\nPlease try to add the integration configuration later when the source contains the schedule data.\n{urls}"
+      "dtek_json_empty_data": "Failed to fetch groups.\nPlease check your connection to the data source.\n`fact.data` field should exist and not be empty.\nThis can happen if there are no scheduled outages for today.\nPlease try to add the integration configuration later when the source contains the schedule data.\n{urls}",
+      "dtek_krem_empty_data": "Failed to fetch groups from DTEK KREM.\nPlease check your cookies and try again."
     },
     "step": {
       "user": {
@@ -21,6 +22,16 @@
         },
         "data_description": {
           "group": "Find your group at: {yasno_url} / {dtek_url}"
+        }
+      },
+      "dtek_krem_cookies": {
+        "title": "DTEK KREM — Authentication",
+        "description": "Enter the Cookie string from your browser to access the DTEK KREM API",
+        "data": {
+          "cookies": "Cookie string"
+        },
+        "data_description": {
+          "cookies": "Open {dtek_krem_url} in your browser, copy the Cookie string from DevTools (Network tab → any request → Cookie header) and paste it here"
         }
       },
       "esvitlo_auth": {
@@ -43,7 +54,8 @@
       }
     },
     "error": {
-      "invalid_auth": "Invalid username or password"
+      "invalid_auth": "Invalid username or password",
+      "dtek_krem_cookie_error": "Failed to fetch data from DTEK KREM. Please check your cookies and try again"
     }
   },
   "device": {
@@ -60,6 +72,7 @@
   "selector": {
     "provider": {
       "options": {
+        "dtekremprovider_kyiv_region": "DTEK KREM — Kyiv Oblast (live data)",
         "dtekjsonprovider_kyiv_region": "DTEK — Kyiv Oblast",
         "dtekjsonprovider_dnipro": "DTEK — Dnipro and Oblast",
         "dtekjsonprovider_odesa": "DTEK — Odesa and Oblast",
@@ -128,6 +141,7 @@
     "uzhhorod": "Uzhhorod",
     "lviv": "Lviv",
     "ternopil": "Ternopil",
+    "chernihiv": "Chernihiv",
     "zaporizhzhia": "Zaporizhzhia",
     "vinnytsia": "Vinnytsia",
     "zhytomyr": "Zhytomyr",

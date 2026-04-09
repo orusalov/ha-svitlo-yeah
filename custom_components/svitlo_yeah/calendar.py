@@ -56,7 +56,6 @@ class PlannedOutagesCalendar(IntegrationEntity, CalendarEntity):
         self.entity_id = f"calendar.{entity_id_base}"
         self.entity_description = CalendarEntityDescription(
             key="calendar",
-            name="Calendar",
             translation_key="calendar",
         )
         self._attr_unique_id = (
@@ -99,7 +98,6 @@ class ScheduledOutagesCalendar(IntegrationEntity, CalendarEntity):
         self.entity_id = f"calendar.{entity_id_base}"
         self.entity_description = CalendarEntityDescription(
             key="scheduled_calendar",
-            name="Scheduled Calendar",
             translation_key="scheduled_calendar",
         )
         self._attr_unique_id = (
