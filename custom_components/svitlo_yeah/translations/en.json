@@ -72,7 +72,7 @@
   "selector": {
     "provider": {
       "options": {
-        "dtekremprovider_kyiv_region": "DTEK KREM — Kyiv Oblast (live data)",
+        "dtekapiprovider_kyiv_region": "DTEK KREM — Kyiv Oblast (live data)",
         "dtekjsonprovider_kyiv_region": "DTEK — Kyiv Oblast",
         "dtekjsonprovider_dnipro": "DTEK — Dnipro and Oblast",
         "dtekjsonprovider_odesa": "DTEK — Odesa and Oblast",

@@ -103,7 +103,7 @@ class DtekKremProvider(BaseProvider):
     @cached_property
     def unique_key(self) -> str:
         """Generate unique key for this provider."""
-        return f"{self.__class__.__name__.lower()}_{self.region_name}"
+        return f"dtekapiprovider_{self.region_name}"
 
     @cached_property
     def provider_id(self) -> str:
