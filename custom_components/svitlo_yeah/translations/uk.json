@@ -72,7 +72,7 @@
   "selector": {
     "provider": {
       "options": {
-        "dtekremprovider_kyiv_region": "ДТЕК КРЕМ — Київська Область (живі дані)",
+        "dtekapiprovider_kyiv_region": "ДТЕК КРЕМ — Київська Область (живі дані)",
         "dtekjsonprovider_kyiv_region": "ДТЕК — Київська Область",
         "dtekjsonprovider_dnipro": "ДТЕК — Дніпро та Область",
         "dtekjsonprovider_odesa": "ДТЕК — Одеса та Область",
