@@ -7,7 +7,12 @@ from dataclasses import dataclass
 from functools import cached_property
 from typing import Self
 
-from ..const import PROVIDER_TYPE_DTEK_JSON, PROVIDER_TYPE_E_SVITLO, PROVIDER_TYPE_YASNO
+from ..const import (
+    PROVIDER_TYPE_DTEK_JSON,
+    PROVIDER_TYPE_DTEK_KREM,
+    PROVIDER_TYPE_E_SVITLO,
+    PROVIDER_TYPE_YASNO,
+)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -86,6 +91,24 @@ class YasnoProvider(BaseProvider):
     def from_dict(cls, data: dict, region_id: int, region_name: str) -> Self:
         """Create instance from dict data."""
         return cls(**data, region_id=region_id, region_name=region_name)
+
+
+@dataclass(frozen=True, kw_only=True)
+class DtekKremProvider(BaseProvider):
+    """DTEK KREM provider — live API for Kyiv Oblast."""
+
+    region_name: str = "kyiv_region"
+    provider_type: str = PROVIDER_TYPE_DTEK_KREM
+
+    @cached_property
+    def unique_key(self) -> str:
+        """Generate unique key for this provider."""
+        return f"{self.__class__.__name__.lower()}_{self.region_name}"
+
+    @cached_property
+    def provider_id(self) -> str:
+        """Provider ID."""
+        return self.region_name
 
 
 @dataclass(frozen=True, kw_only=True)
