@@ -96,9 +96,9 @@ class DtekKremAPI(DtekAPIBase):
                     timeout=aiohttp.ClientTimeout(total=30),
                 ) as response:
                     response.raise_for_status()
-                    data = await response.json()
+                    data = await response.json(content_type=None)
 
-            except aiohttp.ClientError:
+            except (aiohttp.ClientError, ValueError):
                 LOGGER.exception("DTEK KREM: Error fetching outage data")
                 return
 
