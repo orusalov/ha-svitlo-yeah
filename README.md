@@ -13,7 +13,7 @@
 A [Home Assistant][home-assistant] integration that tracks electricity outage schedules from Ukrainian energy providers,
 providing outage calendars, countdown timers, and status updates.
 
-###### [Цей документ українською](https://github-com.translate.goog/ALERTua/ha-svitlo-yeah/blob/main/README.md?_x_tr_sl=en&_x_tr_tl=uk&_x_tr_hl=en&_x_tr_pto=wapp)
+###### [Цей документ українською](https://github-com.translate.goog/orusalov/ha-svitlo-yeah/blob/main/README.md?_x_tr_sl=en&_x_tr_tl=uk&_x_tr_hl=en&_x_tr_pto=wapp)
 
 ## Supported Regions
 
@@ -49,7 +49,7 @@ If it doesn't work, adding this repository to HACS manually by adding this URL:
 
 1. Visit **HACS** → **Integrations** → **...** (in the top right) → **Custom repositories**
 2. Click **Add**
-3. Paste `https://github.com/ALERTua/ha-svitlo-yeah` into the **URL** field
+3. Paste `https://github.com/orusalov/ha-svitlo-yeah` into the **URL** field
 4. Chose **Integration** as a **Category**
 5. **Svitlo Yeah | Світло Є** will appear in the list of available integrations. Install it normally.
 
@@ -178,11 +178,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for information about adding new regions 
 
 <!-- Badges -->
 
-[gh-release-url]: https://github.com/ALERTua/ha-svitlo-yeah/releases/latest
+[gh-release-url]: https://github.com/orusalov/ha-svitlo-yeah/releases/latest
 
-[gh-release-image]: https://img.shields.io/github/v/release/ALERTua/ha-svitlo-yeah?style=flat-square
+[gh-release-image]: https://img.shields.io/github/v/release/orusalov/ha-svitlo-yeah?style=flat-square
 
-[gh-downloads-url]: https://github.com/ALERTua/ha-svitlo-yeah/releases
+[gh-downloads-url]: https://github.com/orusalov/ha-svitlo-yeah/releases
 
 [hacs-url]: https://github.com/hacs/integration
 
@@ -192,7 +192,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for information about adding new regions 
 
 [home-assistant]: https://www.home-assistant.io/
 
-[hasc-install-url]: https://my.home-assistant.io/redirect/hacs_repository/?owner=ALERTua&repository=ha-svitlo-yeah&category=integration
+[hasc-install-url]: https://my.home-assistant.io/redirect/hacs_repository/?owner=orusalov&repository=ha-svitlo-yeah&category=integration
 
 [hacs-install-image]: https://my.home-assistant.io/badges/hacs_repository.svg
 
