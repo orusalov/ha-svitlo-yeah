@@ -31,11 +31,13 @@ PROVIDER_DTEK_FULL: Final = "ДТЕК КИЇВСЬКІ ЕЛЕКТРОМЕРЕЖ�
 PROVIDER_DTEK_SHORT: Final = "ДТЕК"
 
 # DTEK KREM API
+DTEK_KREM_ORIGIN: Final = "https://www.dtek-krem.com.ua"
 DTEK_KREM_SHUTDOWNS_URL: Final = "https://www.dtek-krem.com.ua/ua/shutdowns"
 DTEK_KREM_AJAX_URL: Final = "https://www.dtek-krem.com.ua/ua/ajax"
 CONF_COOKIES: Final = "cookies"
 
 # DTEK OEM API
+DTEK_OEM_ORIGIN: Final = "https://www.dtek-oem.com.ua"
 DTEK_OEM_SHUTDOWNS_URL: Final = "https://www.dtek-oem.com.ua/ua/shutdowns"
 DTEK_OEM_AJAX_URL: Final = "https://www.dtek-oem.com.ua/ua/ajax"
 

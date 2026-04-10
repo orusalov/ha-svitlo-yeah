@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ...const import DTEK_OEM_AJAX_URL, DTEK_OEM_SHUTDOWNS_URL
+from ...const import DTEK_OEM_AJAX_URL, DTEK_OEM_ORIGIN, DTEK_OEM_SHUTDOWNS_URL
 from .ajax_api import DtekAjaxAPIBase
 
 
@@ -12,5 +12,5 @@ class DtekOemAPI(DtekAjaxAPIBase):
     _csrf_cookie_name = "_csrf-dtek-oem"
     _ajax_url = DTEK_OEM_AJAX_URL
     _shutdowns_url = DTEK_OEM_SHUTDOWNS_URL
-    _origin = "https://www.dtek-oem.com.ua"
+    _origin = DTEK_OEM_ORIGIN
     _log_prefix = "DTEK OEM"
