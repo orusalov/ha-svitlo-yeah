@@ -23,6 +23,7 @@ CONF_PROVIDER_TYPE: Final = "provider_type"
 PROVIDER_TYPE_YASNO: Final = "yasno"
 PROVIDER_TYPE_DTEK_JSON: Final = "dtek_json"
 PROVIDER_TYPE_DTEK_KREM: Final = "dtek_krem"
+PROVIDER_TYPE_DTEK_OEM: Final = "dtek_oem"
 PROVIDER_TYPE_E_SVITLO: Final = "e-svitlo"
 
 # Provider name simplification
@@ -30,9 +31,15 @@ PROVIDER_DTEK_FULL: Final = "ДТЕК КИЇВСЬКІ ЕЛЕКТРОМЕРЕЖ�
 PROVIDER_DTEK_SHORT: Final = "ДТЕК"
 
 # DTEK KREM API
+DTEK_KREM_ORIGIN: Final = "https://www.dtek-krem.com.ua"
 DTEK_KREM_SHUTDOWNS_URL: Final = "https://www.dtek-krem.com.ua/ua/shutdowns"
 DTEK_KREM_AJAX_URL: Final = "https://www.dtek-krem.com.ua/ua/ajax"
 CONF_COOKIES: Final = "cookies"
+
+# DTEK OEM API
+DTEK_OEM_ORIGIN: Final = "https://www.dtek-oem.com.ua"
+DTEK_OEM_SHUTDOWNS_URL: Final = "https://www.dtek-oem.com.ua/ua/shutdowns"
+DTEK_OEM_AJAX_URL: Final = "https://www.dtek-oem.com.ua/ua/ajax"
 
 TZ_UA = ZoneInfo("Europe/Kyiv")
 
@@ -61,6 +68,7 @@ PROVIDER_TO_DEVICE_NAME_MAP: Final = {
     PROVIDER_TYPE_YASNO: DEVICE_NAME_YASNO_TRANSLATION_KEY,
     PROVIDER_TYPE_DTEK_JSON: DEVICE_NAME_DTEK_TRANSLATION_KEY,
     PROVIDER_TYPE_DTEK_KREM: DEVICE_NAME_DTEK_TRANSLATION_KEY,
+    PROVIDER_TYPE_DTEK_OEM: DEVICE_NAME_DTEK_TRANSLATION_KEY,
     PROVIDER_TYPE_E_SVITLO: DEVICE_NAME_E_SVITLO_TRANSLATION_KEY,
 }
 TRANSLATION_KEY_EVENT_PLANNED_OUTAGE: Final = (

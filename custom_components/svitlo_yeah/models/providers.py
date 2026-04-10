@@ -10,6 +10,7 @@ from typing import Self
 from ..const import (
     PROVIDER_TYPE_DTEK_JSON,
     PROVIDER_TYPE_DTEK_KREM,
+    PROVIDER_TYPE_DTEK_OEM,
     PROVIDER_TYPE_E_SVITLO,
     PROVIDER_TYPE_YASNO,
 )
@@ -99,6 +100,24 @@ class DtekKremProvider(BaseProvider):
 
     region_name: str = "kyiv_region"
     provider_type: str = PROVIDER_TYPE_DTEK_KREM
+
+    @cached_property
+    def unique_key(self) -> str:
+        """Generate unique key for this provider."""
+        return f"dtekapiprovider_{self.region_name}"
+
+    @cached_property
+    def provider_id(self) -> str:
+        """Provider ID."""
+        return self.region_name
+
+
+@dataclass(frozen=True, kw_only=True)
+class DtekOemProvider(BaseProvider):
+    """DTEK OEM provider — live API for Odesa Oblast."""
+
+    region_name: str = "odesa_region"
+    provider_type: str = PROVIDER_TYPE_DTEK_OEM
 
     @cached_property
     def unique_key(self) -> str:

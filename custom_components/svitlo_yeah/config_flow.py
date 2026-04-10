@@ -17,7 +17,9 @@ from homeassistant.helpers.selector import (
 )
 
 from .api.dtek.json import DtekAPIJson
-from .api.dtek.krem import DtekKremAPI, parse_cookie_string
+from .api.dtek.krem import DtekKremAPI
+from .api.dtek.ajax_api import parse_cookie_string
+from .api.dtek.oem import DtekOemAPI
 from .api.e_svitlo import ESvitloClient
 from .api.yasno import YASNO_REGIONS_ENDPOINT, YasnoApi
 from .const import (
@@ -29,10 +31,12 @@ from .const import (
     CONF_PROVIDER_TYPE,
     CONF_REGION,
     DOMAIN,
+    DTEK_OEM_SHUTDOWNS_URL,
     DTEK_PROVIDER_URLS,
     NAME,
     PROVIDER_TYPE_DTEK_JSON,
     PROVIDER_TYPE_DTEK_KREM,
+    PROVIDER_TYPE_DTEK_OEM,
     PROVIDER_TYPE_E_SVITLO,
     PROVIDER_TYPE_YASNO,
 )
@@ -40,6 +44,7 @@ from .models.providers import (
     BaseProvider,
     DTEKJsonProvider,
     DtekKremProvider,
+    DtekOemProvider,
     ESvitloProvider,
     YasnoProvider,
 )
@@ -94,6 +99,9 @@ class IntegrationConfigFlow(ConfigFlow, domain=DOMAIN):
             elif selected_provider.provider_type == PROVIDER_TYPE_DTEK_KREM:
                 # noinspection PyTypeChecker
                 return await self.async_step_dtek_krem_cookies()
+            elif selected_provider.provider_type == PROVIDER_TYPE_DTEK_OEM:
+                # noinspection PyTypeChecker
+                return await self.async_step_dtek_oem_cookies()
 
             # noinspection PyTypeChecker
             return await self.async_step_group()
@@ -116,9 +124,10 @@ class IntegrationConfigFlow(ConfigFlow, domain=DOMAIN):
         dtek_providers = [DTEKJsonProvider(region_name=_) for _ in DTEK_PROVIDER_URLS]
 
         dtek_krem_provider = DtekKremProvider()
+        dtek_oem_provider = DtekOemProvider()
         e_svitlo_provider = ESvitloProvider(user_name="sumy", password="")
 
-        all_providers = yasno_providers + dtek_providers + [dtek_krem_provider, e_svitlo_provider]
+        all_providers = yasno_providers + dtek_providers + [dtek_krem_provider, dtek_oem_provider, e_svitlo_provider]
         self.available_providers = {_.unique_key: _ for _ in all_providers}
 
         provider_options = [
@@ -211,6 +220,16 @@ class IntegrationConfigFlow(ConfigFlow, domain=DOMAIN):
                 # noinspection PyTypeChecker
                 return self.async_abort(reason="dtek_krem_empty_data")
 
+        elif provider_type == PROVIDER_TYPE_DTEK_OEM:
+            cookie_str = self.data.get(CONF_COOKIES, "")
+            cookies = parse_cookie_string(cookie_str)
+            temp_api = DtekOemAPI(cookies=cookies, group=None)
+            await temp_api.fetch_data()
+            groups = temp_api.get_dtek_region_groups()
+            if not groups:
+                # noinspection PyTypeChecker
+                return self.async_abort(reason="dtek_oem_empty_data")
+
         data_schema = vol.Schema(
             {
                 vol.Required(
@@ -275,6 +294,43 @@ class IntegrationConfigFlow(ConfigFlow, domain=DOMAIN):
             data_schema=data_schema,
             errors=errors,
             description_placeholders={"dtek_krem_url": "https://www.dtek-krem.com.ua/ua/shutdowns"},
+        )
+
+    async def async_step_dtek_oem_cookies(
+        self, user_input: dict | None = None
+    ) -> ConfigFlowResult:
+        """Handle cookie input step for DTEK OEM."""
+        errors = {}
+
+        if user_input is not None:
+            cookie_str = user_input[CONF_COOKIES].strip()
+            cookies = parse_cookie_string(cookie_str)
+
+            temp_api = DtekOemAPI(cookies=cookies, group=None)
+            await temp_api.fetch_data()
+
+            if temp_api.get_dtek_region_groups():
+                self.data[CONF_COOKIES] = cookie_str
+                # noinspection PyTypeChecker
+                return await self.async_step_group()
+
+            errors["base"] = "dtek_oem_cookie_error"
+
+        data_schema = vol.Schema(
+            {
+                vol.Required(
+                    CONF_COOKIES,
+                    default=get_config_value(None, CONF_COOKIES, ""),
+                ): str,
+            }
+        )
+
+        # noinspection PyTypeChecker
+        return self.async_show_form(
+            step_id="dtek_oem_cookies",
+            data_schema=data_schema,
+            errors=errors,
+            description_placeholders={"dtek_oem_url": DTEK_OEM_SHUTDOWNS_URL},
         )
 
     async def async_step_esvitlo_auth(

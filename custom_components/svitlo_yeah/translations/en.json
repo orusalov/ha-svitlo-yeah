@@ -5,7 +5,8 @@
       "no_accounts_found": "No accounts found",
       "yasno_connection_error": "Failed to fetch Yasno groups.\nPlease check your connection to Yasno API.\n{url}",
       "dtek_json_empty_data": "Failed to fetch groups.\nPlease check your connection to the data source.\n`fact.data` field should exist and not be empty.\nThis can happen if there are no scheduled outages for today.\nPlease try to add the integration configuration later when the source contains the schedule data.\n{urls}",
-      "dtek_krem_empty_data": "Failed to fetch groups from DTEK KREM.\nPlease check your cookies and try again."
+      "dtek_krem_empty_data": "Failed to fetch groups from DTEK KREM.\nPlease check your cookies and try again.",
+      "dtek_oem_empty_data": "Failed to fetch groups from DTEK OEM.\nPlease check your cookies and try again."
     },
     "step": {
       "user": {
@@ -34,6 +35,16 @@
           "cookies": "Open {dtek_krem_url} in your browser, copy the Cookie string from DevTools (Network tab → any request → Cookie header) and paste it here"
         }
       },
+      "dtek_oem_cookies": {
+        "title": "DTEK OEM — Authentication",
+        "description": "Enter the Cookie string from your browser to access the DTEK OEM API",
+        "data": {
+          "cookies": "Cookie string"
+        },
+        "data_description": {
+          "cookies": "Open {dtek_oem_url} in your browser, copy the Cookie string from DevTools (Network tab → any request → Cookie header) and paste it here"
+        }
+      },
       "esvitlo_auth": {
         "title": "E-Svitlo Authentication",
         "description": "Enter your E-Svitlo credentials",
@@ -55,7 +66,8 @@
     },
     "error": {
       "invalid_auth": "Invalid username or password",
-      "dtek_krem_cookie_error": "Failed to fetch data from DTEK KREM. Please check your cookies and try again"
+      "dtek_krem_cookie_error": "Failed to fetch data from DTEK KREM. Please check your cookies and try again",
+      "dtek_oem_cookie_error": "Failed to fetch data from DTEK OEM. Please check your cookies and try again"
     }
   },
   "device": {
@@ -73,6 +85,7 @@
     "provider": {
       "options": {
         "dtekapiprovider_kyiv_region": "DTEK KREM — Kyiv Oblast (live data)",
+        "dtekapiprovider_odesa_region": "DTEK OEM — Odesa Oblast (live data)",
         "dtekjsonprovider_kyiv_region": "DTEK — Kyiv Oblast",
         "dtekjsonprovider_dnipro": "DTEK — Dnipro and Oblast",
         "dtekjsonprovider_odesa": "DTEK — Odesa and Oblast",
@@ -146,6 +159,7 @@
     "vinnytsia": "Vinnytsia",
     "zhytomyr": "Zhytomyr",
     "sumy": "Sumy",
+    "odesa_region": "Odesa Oblast",
     "poltava": "Poltava",
     "rivne": "Rivne"
   }
