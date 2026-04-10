@@ -23,6 +23,7 @@ providing outage calendars, countdown timers, and status updates.
 | **Dnipro**                     | DnEM     | [Yasno API](https://yasno.ua)                                                                                                                                                                                                           |
 | **Dnipro**                     | CEK      | [Yasno API](https://yasno.ua)                                                                                                                                                                                                           |
 | **Kyiv Oblast**                | DTEK KREM | [dtek-krem.com.ua](https://www.dtek-krem.com.ua/ua/shutdowns) (live API, requires browser cookies)                                                                                                                                    |
+| **Odesa Oblast**               | DTEK OEM  | [dtek-oem.com.ua](https://www.dtek-oem.com.ua/ua/shutdowns) (live API, requires browser cookies)                                                                                                                                      |
 | **Kyiv Oblast**                | DTEK     | [Baskerville42/outage-data-ua](https://github.com/Baskerville42/outage-data-ua/blob/main/data/kyiv-region.json)                                                                                                                         |
 | **Dnipro and Oblast**          | DTEK     | [Baskerville42/outage-data-ua](https://github.com/Baskerville42/outage-data-ua/blob/main/data/dnipro.json)                                                                                                                              |
 | **Odesa and Oblast**           | DTEK     | [Baskerville42/outage-data-ua](https://github.com/Baskerville42/outage-data-ua/blob/main/data/odesa.json)                                                                                                                               |
@@ -166,6 +167,20 @@ This provider fetches data directly from the [DTEK KREM website](https://www.dte
 1. Open [https://www.dtek-krem.com.ua/ua/shutdowns](https://www.dtek-krem.com.ua/ua/shutdowns) in your browser
 2. Open **DevTools** (`F12`) → **Network** tab
 3. Reload the page and click on any request to `dtek-krem.com.ua`
+4. Find the **Cookie** header in the **Request Headers** section
+5. Copy the full value and paste it into the integration setup form
+
+> **Note:** When the cookies eventually expire, you will need to repeat this process and update the integration configuration.
+
+### DTEK OEM — Odesa Oblast (live data)
+
+This provider fetches data directly from the [DTEK OEM website](https://www.dtek-oem.com.ua/ua/shutdowns) and requires browser session cookies for authentication. The cookies are long-lived (several months).
+
+**How to get your cookies:**
+
+1. Open [https://www.dtek-oem.com.ua/ua/shutdowns](https://www.dtek-oem.com.ua/ua/shutdowns) in your browser
+2. Open **DevTools** (`F12`) → **Network** tab
+3. Reload the page and click on any request to `dtek-oem.com.ua`
 4. Find the **Cookie** header in the **Request Headers** section
 5. Copy the full value and paste it into the integration setup form
 
