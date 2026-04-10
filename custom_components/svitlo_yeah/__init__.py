@@ -11,11 +11,13 @@ from .const import (
     CONF_PROVIDER_TYPE,
     PROVIDER_TYPE_DTEK_JSON,
     PROVIDER_TYPE_DTEK_KREM,
+    PROVIDER_TYPE_DTEK_OEM,
     PROVIDER_TYPE_E_SVITLO,
     PROVIDER_TYPE_YASNO,
 )
 from .coordinator.dtek.json import DtekCoordinatorJson
 from .coordinator.dtek.krem import DtekKremCoordinator
+from .coordinator.dtek.oem import DtekOemCoordinator
 from .coordinator.e_svitlo import ESvitloCoordinator
 from .coordinator.yasno import YasnoCoordinator
 
@@ -40,6 +42,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         coordinator = DtekCoordinatorJson(hass, entry)
     elif provider_type == PROVIDER_TYPE_DTEK_KREM:
         coordinator = DtekKremCoordinator(hass, entry)
+    elif provider_type == PROVIDER_TYPE_DTEK_OEM:
+        coordinator = DtekOemCoordinator(hass, entry)
     elif provider_type == PROVIDER_TYPE_YASNO:
         coordinator = YasnoCoordinator(hass, entry)
     elif provider_type == PROVIDER_TYPE_E_SVITLO:
