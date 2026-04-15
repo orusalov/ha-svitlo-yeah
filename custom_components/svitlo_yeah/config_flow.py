@@ -31,6 +31,7 @@ from .const import (
     CONF_PROVIDER_TYPE,
     CONF_REGION,
     DOMAIN,
+    DTEK_KREM_SHUTDOWNS_URL,
     DTEK_OEM_SHUTDOWNS_URL,
     DTEK_PROVIDER_URLS,
     NAME,
@@ -246,9 +247,15 @@ class IntegrationConfigFlow(ConfigFlow, domain=DOMAIN):
 
         # Add description placeholders with URLs
         if not description_placeholders:
+            provider_type = self.data.get(CONF_PROVIDER_TYPE)
+            dtek_url = (
+                DTEK_OEM_SHUTDOWNS_URL
+                if provider_type == PROVIDER_TYPE_DTEK_OEM
+                else DTEK_KREM_SHUTDOWNS_URL
+            )
             description_placeholders = {
                 "yasno_url": "https://static.yasno.ua/kyiv/outages",
-                "dtek_url": "https://www.dtek-krem.com.ua/ua/shutdowns",
+                "dtek_url": dtek_url,
             }
 
         # noinspection PyTypeChecker
