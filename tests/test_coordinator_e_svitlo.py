@@ -77,3 +77,17 @@ def test_provider_name_fallback(coordinator, mock_entry):
     """Test provider_name fallback."""
     mock_entry.data = {}
     assert coordinator.provider_name == "E-Svitlo (user)"
+
+
+def test_region_name_returns_translation(coordinator):
+    """Test region_name returns localized value when translation is available."""
+    coordinator.translations = {
+        "component.svitlo_yeah.common.sumy": "Суми",
+    }
+    assert coordinator.region_name == "Суми"
+
+
+def test_region_name_fallback_without_translation(coordinator):
+    """Test region_name returns raw key when translation is missing."""
+    coordinator.translations = {}
+    assert coordinator.region_name == "sumy"

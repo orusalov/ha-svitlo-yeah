@@ -242,7 +242,6 @@ class IntegrationCoordinator(DataUpdateCoordinator):
             summary=summary,
             start=event.start,
             end=event.end,
-            description=event.event_type.value,
             uid=event.event_type.value,
         )
 
