@@ -47,7 +47,8 @@ class ESvitloCoordinator(IntegrationCoordinator):
     @property
     def region_name(self) -> str:
         """Get the configured region name."""
-        return self.provider.region_name
+        key = f"component.svitlo_yeah.common.{self.provider.region_name}"
+        return self.translations.get(key, self.provider.region_name)
 
     @property
     def provider_name(self) -> str:
