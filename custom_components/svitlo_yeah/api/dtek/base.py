@@ -158,10 +158,13 @@ class DtekAPIBase:
             '1761688800': {
                 'GPV1.1': {
         """
-        if not self.data or "data" not in self.data:
+        # The live API returns `data` as an empty list [] when there are no
+        # outages, so guard against anything that is not a populated dict.
+        data = self.data.get("data") if self.data else None
+        if not isinstance(data, dict) or not data:
             return []
 
-        first_timestamp = next(iter(self.data["data"].values()), {})
+        first_timestamp = next(iter(data.values()), {})
         return [key.replace("GPV", "") for key in first_timestamp]
 
     def get_current_event(self, at: datetime.datetime) -> PlannedOutageEvent | None:
@@ -176,12 +179,15 @@ class DtekAPIBase:
         self, start_date: datetime.datetime, end_date: datetime.datetime
     ) -> list[PlannedOutageEvent]:
         """Get all events within the date range."""
-        if not self.data or "data" not in self.data or not self.group:
+        # The live API returns `data` as an empty list [] when there are no
+        # outages, so guard against anything that is not a populated dict.
+        data = self.data.get("data") if self.data else None
+        if not isinstance(data, dict) or not data or not self.group:
             return []
 
         events = []
         group_key = f"GPV{self.group}"
-        for timestamp_str, day_data in self.data["data"].items():
+        for timestamp_str, day_data in data.items():
             if group_key not in day_data:
                 continue
 

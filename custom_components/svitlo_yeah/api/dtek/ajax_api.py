@@ -98,11 +98,24 @@ class DtekAjaxAPIBase(DtekAPIBase):
             return None
         return _mask_csrf_token(raw_token)
 
+    def _default_to_empty_data(self) -> None:
+        """Fall back to an empty (but valid) `fact` if nothing has been fetched yet.
+
+        The live API returns a `fact` like ``{"data": {...}, "update": ...}`` and,
+        when there are no outages at all, ``fact["data"]`` is an empty list ``[]``.
+        We mirror that shape with an empty dataset so downstream code treats it as
+        "no power outages" instead of leaving self.data as None ("no data at all").
+        Existing cached data is never overwritten.
+        """
+        if self.data is None:
+            self.data = {"data": {}}
+
     async def fetch_data(self) -> None:
         """Fetch outage data from the DTEK live API."""
         csrf_token = self._get_csrf_token()
         if not csrf_token:
             LOGGER.error("%s: Cannot proceed without CSRF token", self._log_prefix)
+            self._default_to_empty_data()
             return
 
         try:
@@ -129,10 +142,12 @@ class DtekAjaxAPIBase(DtekAPIBase):
 
         except (aiohttp.ClientError, ValueError):
             LOGGER.exception("%s: Error fetching outage data", self._log_prefix)
+            self._default_to_empty_data()
             return
 
         if not data:
             LOGGER.warning("%s: Empty response", self._log_prefix)
+            self._default_to_empty_data()
             return
 
         if not data.get("result"):
@@ -141,11 +156,13 @@ class DtekAjaxAPIBase(DtekAPIBase):
                 self._log_prefix,
                 self._last_update,
             )
+            self._default_to_empty_data()
             return
 
         fact = data.get("fact")
         if not fact:
             LOGGER.warning("%s: result=True but no 'fact' in response", self._log_prefix)
+            self._default_to_empty_data()
             return
 
         self.data = fact
