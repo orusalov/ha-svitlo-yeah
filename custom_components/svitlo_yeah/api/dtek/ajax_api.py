@@ -115,7 +115,6 @@ class DtekAjaxAPIBase(DtekAPIBase):
         csrf_token = self._get_csrf_token()
         if not csrf_token:
             LOGGER.error("%s: Cannot proceed without CSRF token", self._log_prefix)
-            self._default_to_empty_data()
             return
 
         try:
